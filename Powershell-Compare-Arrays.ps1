@@ -31,10 +31,10 @@
 #>
 
 
-# Our Array of Currently installed software.
+# Array of Currently installed software.
 [collections.Arraylist]$CurrentSoftware = Get-Package | Where-Object {$_.providername -ne "msu"} | Select-Object -ExpandProperty Name
 
-# Our Array of software to find.
+# Array of software to find.
 #[collections.Arraylist]$CompareList = Ninja-Property-Options windowsSoftware
 
 $CompareList = @(
@@ -47,17 +47,17 @@ $CompareList = @(
     "NVIDIA GeForce", "PhotoShop"
     )
 
-# Our empty hashtable to populate with comparison results.
+# Empty hashtable to populate with comparison results.
 $Result = New-Object System.Data.DataTable
 [void]$Result.Columns.Add("Searched for")
 [void]$Result.Columns.Add("Exists?")
 
-# Our parsing and populating the empty hashtable adventure
+# Parsing and populating the empty hashtable adventure
 for($i = 0; $i -lt $CompareList.Count; $i ++){
     #Try .contains method first
     $TryFirst = $CurrentSoftware.Contains($CompareList[$i])
 
-    # If .Contains is false, try the 'where' tactic, just in case.
+    # If .Contains is false, try the 'where', just in case.
     if($TryFirst -eq $false){
         $TrySecond = $currentsoftware | Where-Object {$_ -Match $CompareList[$i]}
         [void]$Result.Rows.Add($CompareList[$i], -Not[string]::IsNullOrEmpty($TrySecond))
