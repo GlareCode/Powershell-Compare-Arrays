@@ -49,8 +49,8 @@ $CompareList = @(
 
 # Our empty hashtable to populate with comparison results.
 $Result = New-Object System.Data.DataTable
-[void]$Result.Columns.Add("Software Found")
-[void]$Result.Columns.Add("Software Compared")
+[void]$Result.Columns.Add("Searched for")
+[void]$Result.Columns.Add("Exists?")
 
 # Our parsing and populating the empty hashtable adventure
 for($i = 0; $i -lt $CompareList.Count; $i ++){
